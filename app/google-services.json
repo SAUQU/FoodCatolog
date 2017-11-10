@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "233870266415",
+    "firebase_url": "https://foodcatolog.firebaseio.com",
+    "project_id": "foodcatolog",
+    "storage_bucket": "foodcatolog.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233870266415:android:4f9d1d3151c1fe99",
+        "android_client_info": {
+          "package_name": "com.example.segundoauqui.foodcatolog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233870266415-g59ahr7pg7rl32apq0hbml98gtht3ro8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.segundoauqui.foodcatolog",
+            "certificate_hash": "d71ff8af5e223d4e13cb875a3e4dc3eafeb42814"
+          }
+        },
+        {
+          "client_id": "233870266415-au134cc2mvnopquv7tj16h7t5r7s1l6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPHImvYrtkpJF90iQB7dDJ9AUXaCA7OPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233870266415-au134cc2mvnopquv7tj16h7t5r7s1l6m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
