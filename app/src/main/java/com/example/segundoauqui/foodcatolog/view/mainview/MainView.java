@@ -1,9 +1,13 @@
 package com.example.segundoauqui.foodcatolog.view.mainview;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+
 import com.example.segundoauqui.foodcatolog.R;
 import com.example.segundoauqui.foodcatolog.model.Groceries;
 import com.google.firebase.database.ChildEventListener;
@@ -16,6 +20,7 @@ import java.util.List;
 
 public class MainView extends AppCompatActivity {
 
+    private static final String TAG = "Add";
     private RecyclerView recyclerView;
     private List<Groceries> result;
     private RecyclerViewAdapter adapter;
@@ -29,6 +34,13 @@ public class MainView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("groceries");
         result = new ArrayList<>();
@@ -39,6 +51,8 @@ public class MainView extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(result);
         recyclerView.setAdapter(adapter);
         GetDataFromFirebase();
+
+
 
         //new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         // Read from the database
@@ -107,4 +121,8 @@ public class MainView extends AppCompatActivity {
         return index;
     }
 
+    public void onclick(View view) {
+        Log.d(TAG, "onclick: " + view);
+
+    }
 }
