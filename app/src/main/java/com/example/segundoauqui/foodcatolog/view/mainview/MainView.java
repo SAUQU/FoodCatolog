@@ -1,5 +1,7 @@
 package com.example.segundoauqui.foodcatolog.view.mainview;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.segundoauqui.foodcatolog.Main2Activity;
+import com.example.segundoauqui.foodcatolog.Main3Activity;
 import com.example.segundoauqui.foodcatolog.R;
 import com.example.segundoauqui.foodcatolog.model.Groceries;
 import com.example.segundoauqui.foodcatolog.model.SelectedItems;
@@ -31,8 +36,9 @@ public class MainView extends AppCompatActivity {
     RecyclerView.ItemAnimator itemAnimator;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-    private SelectedItems list = new SelectedItems();
-    ImageButton ibSelect;
+    Groceries groceries;
+    private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +49,9 @@ public class MainView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            }
-        });
-
-        ImageButton ibSelect = (ImageButton) findViewById(R.id.ibSelect);
-        ibSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                Intent intent = new Intent(MainView.this, Main3Activity.class);
+                startActivity(intent);
+                Toast.makeText(MainView.this, "Checking Out", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -64,8 +65,6 @@ public class MainView extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(result);
         recyclerView.setAdapter(adapter);
         GetDataFromFirebase();
-        //new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        // Read from the database
     }
 
     private void GetDataFromFirebase() {
@@ -78,7 +77,7 @@ public class MainView extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Groceries groceries = dataSnapshot.getValue(Groceries.class);
+                groceries = dataSnapshot.getValue(Groceries.class);
                 int index = getItem(groceries);
                 result.set(index, groceries);
                 adapter.notifyItemChanged(index);

@@ -1,5 +1,6 @@
 package com.example.segundoauqui.foodcatolog;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -29,4 +30,6 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
+
+
 }

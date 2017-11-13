@@ -1,13 +1,17 @@
 package com.example.segundoauqui.foodcatolog.view.mainview;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.segundoauqui.foodcatolog.R;
 import com.example.segundoauqui.foodcatolog.model.Groceries;
+import com.example.segundoauqui.foodcatolog.model.SelectedItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +22,13 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
+    LinearLayoutManager layoutManager;
+    RecyclerView.ItemAnimator itemAnimator;
+    private RecyclerView recyclerView;
     private List<Groceries> list;
-
+    private RecyclerViewAdapter adapter;
+    private Groceries grocery;
+    ArrayList<SelectedItems> listItems = new ArrayList<>();
     public RecyclerViewAdapter(List<Groceries> list) {
         this.list = list;
     }
@@ -32,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Groceries grocery = list.get(position);
+        grocery = list.get(position);
         holder.name.setText(grocery.name);
         holder.type.setText(grocery.type);
         holder.price.setText(String.valueOf(grocery.price));
@@ -42,52 +51,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return list.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name, type, price;
+        ImageButton ibSelect;
+
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.list_item_name);
             type = (TextView) itemView.findViewById(R.id.list_item_type);
             price = (TextView) itemView.findViewById(R.id.list_item_price);
+            ibSelect = (ImageButton) itemView.findViewById(R.id.ibSelect);
+
+            ibSelect.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listItems.add(new SelectedItems(list.get(getAdapterPosition()).name,
+                    list.get(getAdapterPosition()).type,
+                    list.get(getAdapterPosition()).price));
+            Toast.makeText(view.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition())
+                    + "   " + list.get(getAdapterPosition()).name
+                    + "   " + listItems.size(), Toast.LENGTH_SHORT).show();
+
+            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_selected_item);
+            recyclerView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(layoutManager);
+            adapter = new RecyclerViewAdapter(list);
+            recyclerView.setAdapter(adapter);
         }
     }
 
-
-
-
-//    private ArrayList<String> values;
-//
-//    public RecyclerViewAdapter(ArrayList<String> values) {
-//        this.values = values;
-//    }
-//
-//    @Override
-//    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false));
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(ViewHolder holder, int position) {
-//        holder.name.setText(values.get(position));
-//        holder.type.setText(values.get(position));
-//        holder.price.setText(values.get(position));
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return values.size();
-//    }
-//
-//    class ViewHolder extends RecyclerView.ViewHolder {
-//        private TextView name;
-//        private TextView type;
-//        private TextView price;
-//
-//        ViewHolder(View itemView) {
-//            super(itemView);
-//            name = (TextView) itemView.findViewById(R.id.list_item_name);
-//            type = (TextView) itemView.findViewById(R.id.list_item_type);
-//            price = (TextView) itemView.findViewById(R.id.list_item_price);
-//        }
-//    }
 }
