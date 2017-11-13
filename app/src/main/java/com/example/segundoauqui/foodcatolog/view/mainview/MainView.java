@@ -1,5 +1,6 @@
 package com.example.segundoauqui.foodcatolog.view.mainview;
 
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.segundoauqui.foodcatolog.R;
 import com.example.segundoauqui.foodcatolog.model.Groceries;
+import com.example.segundoauqui.foodcatolog.model.SelectedItems;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +31,8 @@ public class MainView extends AppCompatActivity {
     RecyclerView.ItemAnimator itemAnimator;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private SelectedItems list = new SelectedItems();
+    ImageButton ibSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,14 @@ public class MainView extends AppCompatActivity {
             }
         });
 
+        ImageButton ibSelect = (ImageButton) findViewById(R.id.ibSelect);
+        ibSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("groceries");
         result = new ArrayList<>();
@@ -51,9 +64,6 @@ public class MainView extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(result);
         recyclerView.setAdapter(adapter);
         GetDataFromFirebase();
-
-
-
         //new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         // Read from the database
     }
@@ -76,13 +86,10 @@ public class MainView extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -90,25 +97,7 @@ public class MainView extends AppCompatActivity {
 
             }
         });
-
-
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(Void... voids) {
-//            return false;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean aBoolean) {
-//            super.onPostExecute(aBoolean);
-        }
-
-
+    }
 
     private int getItem(Groceries grocery) {
         int index = -1;
