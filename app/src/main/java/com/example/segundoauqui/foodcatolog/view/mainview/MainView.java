@@ -50,7 +50,7 @@ public class MainView extends AppCompatActivity {
         ibSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+
             }
         });
 
@@ -110,8 +110,4 @@ public class MainView extends AppCompatActivity {
         return index;
     }
 
-    public void onclick(View view) {
-        Log.d(TAG, "onclick: " + view);
-
-    }
 }

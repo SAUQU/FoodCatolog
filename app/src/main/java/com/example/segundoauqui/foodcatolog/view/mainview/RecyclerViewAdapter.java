@@ -36,17 +36,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.name.setText(grocery.name);
         holder.type.setText(grocery.type);
         holder.price.setText(String.valueOf(grocery.price));
-
-
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView name, type, price;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -55,6 +51,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             price = (TextView) itemView.findViewById(R.id.list_item_price);
         }
     }
+
+
 
 
 //    private ArrayList<String> values;
