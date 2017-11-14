@@ -50,8 +50,12 @@ public class Main3Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
-                intent.putExtra("sum",grandTotal(result));
+                Bundle b = new Bundle();
+                b.putDouble("sum",grandTotal(result));
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });
