@@ -66,7 +66,6 @@ public class Main3Activity extends AppCompatActivity {
         for(int i = 0 ; i < items.size(); i++) {
             totalPrice += items.get(i).getPrice();
         }
-
         return totalPrice;
     }
 
