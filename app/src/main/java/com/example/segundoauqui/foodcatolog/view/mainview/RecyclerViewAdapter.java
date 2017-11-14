@@ -22,11 +22,8 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    LinearLayoutManager layoutManager;
-    RecyclerView.ItemAnimator itemAnimator;
-    private RecyclerView recyclerView;
+    private OnItemSelectedListener listener;
     private List<Groceries> list;
-    private RecyclerViewAdapter adapter;
     private Groceries grocery;
     ArrayList<SelectedItems> listItems = new ArrayList<>();
     public RecyclerViewAdapter(List<Groceries> list) {
@@ -52,6 +49,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return list.size();
     }
 
+    public void setItemSelectedListener(OnItemSelectedListener listener) {
+        this.listener = listener;
+    }
+
+    public void unsetItemSelectedListener() {
+        this.listener = null;
+    }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name, type, price;
         ImageButton ibSelect;
@@ -75,13 +79,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     + "   " + list.get(getAdapterPosition()).name
                     + "   " + listItems.size(), Toast.LENGTH_SHORT).show();
 
-            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_selected_item);
-            recyclerView.setHasFixedSize(true);
-            layoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManager);
-            adapter = new RecyclerViewAdapter(list);
-            recyclerView.setAdapter(adapter);
+            listener.onItemSelected(list.get(getAdapterPosition()).getName(),
+                    list.get(getAdapterPosition()).getType(),
+                    list.get(getAdapterPosition()).getPrice());
         }
+    }
+    public interface OnItemSelectedListener {
+        void onItemSelected(String name, String type, double price);
     }
 
 }

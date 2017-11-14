@@ -10,9 +10,20 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.example.segundoauqui.foodcatolog.model.Groceries;
+import com.example.segundoauqui.foodcatolog.model.SelectedItems;
+import com.example.segundoauqui.foodcatolog.view.mainview.MainView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main2Activity extends AppCompatActivity {
 
     private static final String TAG = "Food";
+    private List<Groceries> result;
+    private ArrayList<SelectedItems> itemSelected = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +36,20 @@ public class Main2Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(Main2Activity.this, Main2Activity.class);
+                intent.putExtra("sum",grandTotal(itemSelected));
+                startActivity(intent);
             }
         });
+    }
+        private double grandTotal(List<SelectedItems> items){
+
+        double totalPrice = 0.0;
+        for(int i = 0 ; i < items.size(); i++) {
+            totalPrice += items.get(i).getPrice();
+        }
+
+        return totalPrice;
     }
 
 

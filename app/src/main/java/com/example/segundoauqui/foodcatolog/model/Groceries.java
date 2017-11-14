@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Groceries {
 
-    public Groceries(String s, boolean b) {
+    public Groceries() {
     }
 
     public String name;
@@ -21,7 +21,31 @@ public class Groceries {
         this.type = type;
         this.price = price;
     }
-//    private static int lastContactId = 0;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    //    private static int lastContactId = 0;
 //
 //    public static ArrayList<Groceries> createContactsList(int numContacts) {
 //        ArrayList<Groceries> contacts = new ArrayList<Groceries>();

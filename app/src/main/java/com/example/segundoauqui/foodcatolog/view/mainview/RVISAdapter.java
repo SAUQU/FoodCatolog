@@ -20,13 +20,14 @@ public class RVISAdapter extends RecyclerView.Adapter<RVISAdapter.ViewHolder> {
 
     private List<SelectedItems> list;
     private SelectedItems selectedItems;
-    public RVISAdapter(List<SelectedItems> list){
+
+    public RVISAdapter(List<SelectedItems> list) {
         this.list = list;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_selected_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_selected_item, parent, false));
     }
 
     @Override
@@ -45,6 +46,7 @@ public class RVISAdapter extends RecyclerView.Adapter<RVISAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, type, price;
+
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.list_item_name);
